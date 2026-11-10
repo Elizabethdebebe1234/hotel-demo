@@ -89,6 +89,11 @@ export default function RoomsPage() {
   const [transactionReference, setTransactionReference] = useState("");
   const [screenshot, setScreenshot] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [today, setToday] = useState("");
+
+  useEffect(() => {
+  setToday(new Date().toLocaleDateString("en-CA"));
+}, []);
 
   // Room availability from MongoDB
   const [roomAvailability, setRoomAvailability] = useState(null);
@@ -124,8 +129,7 @@ export default function RoomsPage() {
     loadRoomAvailability();
   }, []);
 
-  const today = new Date().toLocaleDateString("en-CA");
-
+  
   const nights =
     checkIn && checkOut
       ? Math.max(
