@@ -1,69 +1,190 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
+import { ExploreMore, OfferCard } from "@/components/HotelUI";
+
+const image = (id) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1000&q=85`;
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
+    <main>
+      <section className="hero">
+        <div className="hero-overlay" />
+
+        <div className="hero-content">
+          <p className="eyebrow">{t("heroEyebrow")}</p>
+
+          <h1>
+            {t("heroTitle")}
+            <br />
+            <span>{t("heroHighlight")}</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="hero-description">
+            {t("heroDescription")}
           </p>
+
+          <div className="hero-buttons">
+            <Link href="/experiences" className="gold-button">
+              {t("exploreExperiences")} ↗
+            </Link>
+
+            <Link href="/rooms" className="outline-button">
+              {t("discoverRooms")}
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="hero-bottom">
+          <span>{t("heroBottom")}</span>
+          <span>01 — 05</span>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="intro section-padding">
+        <div>
+          <p className="eyebrow">{t("welcomeEyebrow")}</p>
+
+          <h2>
+            {t("welcomeTitle")}
+            <br />
+            <span>{t("welcomeHighlight")}</span>
+          </h2>
+
+          <p>{t("welcomeDescription")}</p>
+
+          <Link href="/contact" className="text-link">
+            {t("discoverStory")} ↗
+          </Link>
+        </div>
+
+        <div className="intro-image">
+          <img
+            src={image("photo-1571896349842-33c89424de2d")}
+            alt="Resort pool"
+          />
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">{t("privateEscape")}</p>
+            <h2>
+              {t("stayIn")} <span>{t("style")}</span>
+            </h2>
+          </div>
+
+          <Link href="/rooms" className="text-link">
+            {t("allRooms")} ↗
+          </Link>
+        </div>
+
+        <div className="room-grid">
+          <OfferCard
+            image={image("photo-1611892440504-42a792e24d32")}
+            category={t("signature")}
+            title={t("signatureSuite")}
+            description={t("signatureDescription")}
+            price={`12,500 ETB${t("perNight")}`}
+            href="/rooms"
+          />
+
+          <OfferCard
+            image={image("photo-1616486338812-3dadae4b4ace")}
+            category={t("premium")}
+            title={t("royalResidence")}
+            description={t("royalDescription")}
+            price={`18,000 ETB${t("perNight")}`}
+            href="/rooms"
+          />
+
+          <OfferCard
+            image={image("photo-1616594039964-ae9021a400a0")}
+            category={t("comfort")}
+            title={t("classicEscape")}
+            description={t("classicDescription")}
+            price={`8,500 ETB${t("perNight")}`}
+            href="/rooms"
+          />
+        </div>
+      </section>
+
+      <section className="booking-access">
+  <p>YOUR NIGHTFALL EXPERIENCE STARTS HERE</p>
+  <h2>READY FOR AN EXTRAORDINARY STAY?</h2>
+
+  <div className="booking-access-buttons">
+    <Link href="/rooms">EXPLORE OUR ROOMS</Link>
+    <Link href="/register">CREATE ACCOUNT</Link>
+    <Link href="/login">CUSTOMER SIGN IN</Link>
+    <Link href="/admin-login">ADMIN ACCESS</Link>
+  </div>
+</section>
+
+      <section className="dining section-padding">
+        <div className="dining-photo">
+          <img
+            src={image("photo-1544025162-d76694265947")}
+            alt="Grilled meat"
+          />
+        </div>
+
+        <div className="dining-content">
+          <p className="eyebrow">{t("diningEyebrow")}</p>
+
+          <h2>
+            {t("diningTitle")} <span>{t("diningHighlight")}</span>
+          </h2>
+
+          <p>{t("diningDescription")}</p>
+
+          <Link href="/dining" className="gold-button">
+            {t("exploreDining")} ↗
+          </Link>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">{t("momentsEyebrow")}</p>
+            <h2>
+              {t("liveThe")} <span>{t("moment")}</span>
+            </h2>
+          </div>
+
+          <Link href="/experiences" className="text-link">
+            {t("allExperiences")} ↗
+          </Link>
+        </div>
+
+        <div className="experience-grid">
+          <OfferCard
+            image={image("photo-1576013551627-0cc20b96c2a7")}
+            category={t("dayExperience")}
+            title={t("poolsideParadise")}
+            description={t("poolDescription")}
+            href="/experiences"
+          />
+
+          <OfferCard
+            image={image("photo-1478131143081-80f7f84ca84d")}
+            category={t("nightExperience")}
+            title={t("campfire")}
+            description={t("campfireDescription")}
+            href="/experiences"
+          />
+        </div>
+      </section>
+
+      
+
+      <ExploreMore exclude="/" />
+    </main>
   );
 }
